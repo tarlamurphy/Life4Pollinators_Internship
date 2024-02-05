@@ -1,0 +1,479 @@
+#Network analysis
+#tirocinio - 22/11/2023
+
+#install.packages("bipartite")
+library(bipartite)
+library(readxl)
+library(tidyverse)
+
+?bipartite
+
+#import the datasets - May, June and July matrices
+#may <- read.csv("maggiomatrix.csv", header = T)
+#june <- read.csv("guignomatrix.csv", header = T)
+#july <- read.csv("lugliomatrix.csv", header = T)
+
+#bipartite - d-prime
+
+#guigno
+sl <- specieslevel(guignomatrix)
+
+#dfun(guignomatrix, abuns=NULL)
+
+#higher level  = plants, lower level = pollinators
+plants.d <- sl$`higher level`$d
+poll.d <- sl$`lower level`$d
+
+print(plants.d)
+write.csv(plants.d,file="guigno_plantsd.csv",row.names=F)
+write.csv(poll.d, file="guigno_polld.csv", row.names=F)
+
+#Maggio
+sl1 <- specieslevel(maggiomatrix)
+plants.d1 <- sl1$`higher level`$d
+poll.d1 <- sl1$`lower level`$d
+
+write.csv(plants.d1,file="maggio_plantsd.csv",row.names=F)
+write.csv(poll.d1, file="maggio_polld.csv", row.names=F)
+
+#luglio
+sl2 <- specieslevel(lugliomatrix)
+plants.d2 <- sl2$`higher level`$d
+poll.d2 <- sl2$`lower level`$d
+
+write.csv(plants.d2,file="luglio_plantsd.csv",row.names=F)
+write.csv(poll.d2, file="luglio_polld.csv", row.names=F)
+
+
+################################
+#set up the web
+library(viridis)
+?viridis
+
+web.maggio <- sortweb(maggiomatrix, sort.order = "dec", sequence = NULL)
+web.m <- plotweb(web.maggio, text.rot = 90)
+
+web.guigno <- sortweb(guignomatrix, sort.order = "dec", sequence = NULL)
+web.g <- plotweb(web.guigno, text.rot = 90)
+
+web.luglio <- sortweb(lugliomatrix, sort.order = "dec", sequence = NULL)
+web.l <- plotweb(web.luglio, text.rot = 90)
+
+
+############################
+#GIUGNO
+#biological = chiusa, rita, zanarini, magli, laffi
+##Most specialised and generalist plant and pollinator of each place each month
+specieslevel(serpieri_g) 
+#pollinator: 0.5451364 Lasioglossum, 00 Xylocopa, 0.1607793 Wasps
+#plant: Papaver.rhoeas  0.8065736, Cirsium.arvensis    0.2949798
+
+specieslevel(bertoncelli_g)
+#poll: 0.51171526 Syrphidae, 0.01209599 Halictus (melitta, 00)
+#plant: Ammi.majus  0.29311362, Malva.sylvestris  0.08132338 (papaver 00)
+
+specieslevel(capitoni_g)
+#poll: 0.57168266 Eucera , 0.03120635 Osmia + Moths
+#plants: 0.5181589 Lotus.corniculatus  ,  0.1281887 Taraxacum.officinale (potentilla recta 00)
+
+specieslevel(chiusa_g)
+#poll: 0.76971601 xylocopa, 0.04473546 Syrphidae
+#plants: Convolvulus.arversis   0.6148492, Anthemis.sp.  0.1951317
+
+specieslevel(laffi_g)
+#poll: 0.33911230 Apis, 0.05584442 Lasioglossum (andrena + moths 00)
+#plants: Bistorta.officinalis   0.51667559, Cirsium.arvensis  0.05661318
+
+specieslevel(magli_g)
+#poll: 0.5745079 Chelostoma, 0.2284116 Butterflies (nomada 00)
+#plants: Crepis.sp. 0.7827688, (Trifolium repens 00)
+
+specieslevel(rita_g)
+#poll: 1.00000000 Eucera, 0.03091399 Syrphidae (nomiapis + wasps 00)
+#plants: Calystegia  1.0000000,  (malva 00)
+
+specieslevel(sanlaz_g)
+#poll: 0.75062126 Hyleus , 0.08443210 Apis 
+#plants: Torlis.arversis  0.8158397, Raphanus.raphanistrum   0.2886025
+
+specieslevel(sasso_g)
+#poll: 0.8142608 Andrena, Chelostoma  0
+#plants: Campanula.rapunculus  0.95865599, achillea 00
+
+specieslevel(terreni_g)
+#poll: 1.0000000 Eucera, 0.1281648 Syrphidae, (Halictus + Osmia 00)
+#plants: Malva.sylvestris 1.0000000, Bellis.perennis  0.0000000
+
+specieslevel(zanarini_g)
+#poll: 0.62537051 Andrena, 00.00 Bombyliidae
+#plants: Erigeron.annuus 0.6234699, Plantago.lanceolata   0.1549020
+
+specieslevel(zocca_g)
+#poll: 0.87734280 Eucera, 00.0 Heriades
+#plants: 0.52326050 Malva.sylvestris, 0.02590395 Medicago sativa
+
+
+#######################
+#LUGLIO
+specieslevel(serpieri.l)
+#0.63996074 Hylaeus, 0.07107899, 0.43739821
+specieslevel(bertoncelli.l)
+specieslevel(capitoni.l)
+specieslevel(chiusa.l)
+specieslevel(laffi.l)
+specieslevel(magli.l)
+specieslevel(rita.l)
+specieslevel(sanlaz.l)
+specieslevel(sasso.l)
+specieslevel(terreni.l)
+specieslevel(zanarini.l)
+specieslevel(zocca.l)
+
+
+#############################
+
+#MAGGIO
+specieslevel(serpieri.maggio)
+specieslevel(bertoncelli.maggio)
+specieslevel(Capitoni.maggio)
+specieslevel(chiusa.maggio)
+specieslevel(laffi.maggio)
+specieslevel(magli.maggio)
+specieslevel(rita.maggio)
+specieslevel(sanlaz.maggio)
+specieslevel(sasso.maggio)
+specieslevel(terreni.maggio)
+specieslevel(zanarini.maggio)
+specieslevel(zocca.maggio)
+
+####################################
+#DEFINITIVO
+specieslevel(serpieri.d)
+specieslevel(bertoncelli.d)
+specieslevel(capitoni.d)
+specieslevel(chiusa.d)
+specieslevel(laffi.d)
+specieslevel(magli.d)
+specieslevel(rita.d)
+specieslevel(sanlaz.d)
+specieslevel(sasso.d)
+specieslevel(terreni.d)
+specieslevel(zanarini.d)
+specieslevel(zocca.d)
+
+#######################
+specieslevel(serpieri_g)
+specieslevel(bertoncelli_g)
+specieslevel(capitoni_g)
+specieslevel(chiusa_g)
+specieslevel(laffi_g)
+specieslevel(magli_g)     
+specieslevel(rita_g)
+specieslevel(sanlaz_g)
+specieslevel(sasso_g)
+specieslevel(terreni_g)
+specieslevel(zanarini_g)
+specieslevel(zocca_g)
+
+#####################################
+####################################
+# ANALYSIS OF D PRIME AND FLORAL UNITY BY MONTH
+# General linear mixed model.
+
+# packages
+library(readxl)
+
+# upload data
+fl_dp_mag <- read_excel("floral unity_d_maggio.xlsx")
+fl_dp_gu <- read_excel("floral unity_d_guigno.xlsx")
+fl_dp_lu <- read_excel("floralo unity_d_luglio.xlsx")
+
+# MAGGIO
+colnames(fl_dp_mag)[3] <- "floral_unity"
+colnames(fl_dp_mag)[2] <- "d_prime"
+
+lm_maggio = lm(d_prime ~ floral_unity, data = fl_dp_mag) #Create the linear regression
+summary(lm_maggio) #Review the results
+
+# shapiro test to test for normality of data
+shapiro.test(fl_dp_mag$floral_unity) # less than 0.05 so not a normal distribution
+#so the linear regression is not the function to use
+
+shapiro.test(fl_dp_mag$d_prime) # p is less than 0.05 
+
+#correlation index - kendall index or spearman index (non parametric such as this)
+#
+cor(fl_dp_mag$d_prime, fl_dp_mag$floral_unity)
+#[1] -0.04074884
+cor(fl_dp_mag$d_prime, fl_dp_mag$floral_unity, method = "spearman")
+#[1] 0.005684193
+cor(fl_dp_mag$d_prime, fl_dp_mag$floral_unity, method = "kendall")
+#[1] -0.00190295
+#correlation  v small
+
+####
+
+# guigno correlation d prime and flower unity
+
+colnames(fl_dp_gu)[3] <- "floral_unity"
+colnames(fl_dp_gu)[2] <- "d_prime"
+
+lm_guigno = lm(d_prime ~ floral_unity, data = fl_dp_gu) #Create the linear regression
+summary(lm_guigno) # p = 0.687
+
+# shapiro test to test for normality of data
+shapiro.test(fl_dp_gu$floral_unity) # p = 1.399e-06
+# less than 0.05 so not a normal distribution
+#so the linear regression is not the function to use
+
+shapiro.test(fl_dp_gu$d_prime) # p = 0.0002395
+# p is less than 0.05 
+
+#correlation index - kendall index or spearman index (non parametric such as this)
+#
+cor(fl_dp_gu$d_prime, fl_dp_gu$floral_unity)
+# -0.07537634
+cor(fl_dp_gu$d_prime, fl_dp_gu$floral_unity, method = "spearman")
+# 0.02984774
+cor(fl_dp_gu$d_prime, fl_dp_gu$floral_unity, method = "kendall")
+# 0.03020498
+#correlation  v small
+
+####
+
+# luglio correlation d prime and flower unity
+
+colnames(fl_dp_lu)[3] <- "floral_unity"
+colnames(fl_dp_lu)[2] <- "d_prime"
+
+lm_luglio = lm(d_prime ~ floral_unity, data = fl_dp_lu) #Create the linear regression
+summary(lm_luglio) # p = 0.268
+
+# shapiro test to test for normality of data
+shapiro.test(fl_dp_lu$floral_unity) # p = 0.02787
+# less than 0.05 so not a normal distribution
+
+shapiro.test(fl_dp_lu$d_prime) # p = 0.1678
+# p is more than 0.05 
+
+#correlation index - kendall index or spearman index (non parametric such as this)
+#
+cor(fl_dp_lu$d_prime, fl_dp_lu$floral_unity)
+# -0.2600437
+cor(fl_dp_lu$d_prime, fl_dp_lu$floral_unity, method = "spearman")
+# -0.2647612
+cor(fl_dp_lu$d_prime, fl_dp_lu$floral_unity, method = "kendall")
+# -0.2058055
+#correlation  v small
+
+
+
+
+
+
+
+
+
+
+
+#Anova
+# qual category - organic and conventional farm 
+
+# average d prime and sum floral unity
+
+## try all this again with the highest and lowest d primes (2 subsets)
+
+
+## can do this as well with pollinators and abundance
+
+
+#highest and lowest d primes 
+
+##############
+
+fl_dp_mag_types <- read_excel("may_fl_dp_types.xlsx")
+
+
+
+########################
+
+
+farm_type_d <- read_excel("farm_type_dprime.xlsx")
+farms_d <- farm_type_d %>% drop_na(`Flower season`)
+
+
+
+###########################
+
+
+as.g <- specieslevel(serpieri_g)
+write.csv(as.g$`higher level`$d,file="d_arserp.csv",row.names=F)
+
+b.g <-  specieslevel(bertoncelli_g)
+write.csv(b.g$`higher level`$d,file="d_bert_g.csv",row.names=F)
+
+c.g <- specieslevel(capitoni_g)
+write.csv(c.g$`higher level`$d,file="d_capi_g.csv",row.names=F)
+
+ch.g <- specieslevel(chiusa_g)
+write.csv(ch.g$`higher level`$d,file="d_chi_g.csv",row.names=F)
+
+l.g <- specieslevel(laffi_g)
+write.csv(l.g$`higher level`$d,file="d_laf_g.csv",row.names=F)
+
+m.g <- specieslevel(magli_g)
+write.csv(m.g$`higher level`$d,file="d_ma_g.csv",row.names=F)
+
+r.g <- specieslevel(rita_g)
+write.csv(r.g$`higher level`$d,file="d_ri_g.csv",row.names=F)
+
+sl.g <- specieslevel(sanlaz_g)
+write.csv(sl.g$`higher level`$d,file="d_sl_g.csv",row.names=F)
+
+ss.g <- specieslevel(sasso_g)
+write.csv(ss.g$`higher level`$d,file="d_ss_g.csv",row.names=F)
+
+t.g <- specieslevel(terreni_g)
+write.csv(t.g$`higher level`$d,file="d_t_g.csv",row.names=F)
+
+za.g <- specieslevel(zanarini_g)
+write.csv(za.g$`higher level`$d,file="d_za_g.csv",row.names=F)
+
+z.g <- specieslevel(zocca_g)
+write.csv(z.g$`higher level`$d,file="d_z_g.csv",row.names=F)
+
+###########################################
+# Luglio
+
+as.l <- specieslevel(serpieri.luglio)
+write.csv(as.l$`higher level`$d,file="d_as_l.csv",row.names=F)
+
+b.l <- specieslevel(bertoncelli.luglio)
+write.csv(b.l$`higher level`$d,file="d_b_l.csv",row.names=F)
+
+c.l <- specieslevel(capitoni.luglio)
+write.csv(c.l$`higher level`$d,file="d_c_l.csv",row.names=F)
+
+ch.l <- specieslevel(chiusa.luglio)
+write.csv(ch.l$`higher level`$d,file="d_ch_l.csv",row.names=F)
+
+l.l <- specieslevel(laffi.luglio)
+write.csv(l.l$`higher level`$d,file="d_l_l.csv",row.names=F)
+
+m.l <- specieslevel(magli.luglio)
+write.csv(m.l$`higher level`$d,file="d_m_l.csv",row.names=F)
+
+r.l <- specieslevel(rita.luglio)
+write.csv(r.l$`higher level`$d,file="d_r_l.csv",row.names=F)
+
+sl.l <- specieslevel(sanlaz.luglio)
+write.csv(sl.l$`higher level`$d,file="d_sl_l.csv",row.names=F)
+
+s.l <- specieslevel(sasso.luglio)
+write.csv(s.l$`higher level`$d,file="d_s_l.csv",row.names=F)
+
+t.l <- specieslevel(terreni.luglio)
+write.csv(t.l$`higher level`$d,file="d_t_l.csv",row.names=F)
+
+za.l <- specieslevel(zanarini.luglio)
+write.csv(za.l$`higher level`$d,file="d_za_l.csv",row.names=F)
+
+z.l <- specieslevel(zocca.luglio)
+write.csv(z.l$`higher level`$d,file="d_z_l.csv",row.names=F)
+
+################################################
+
+
+# farm type correlation d prime and flower unity
+
+## MAGGIO
+
+lm_types_maggio = lm(d_prime ~ floral_unity, data = farms_d_fl_corr) #Create the linear regression
+summary(lm_types_maggio) # p = 0.315
+
+# shapiro test to test for normality of data
+shapiro.test(farms_d_fl_corr$floral_unity) # p = 4.223e-09
+# less than 0.05 so not a normal distribution
+
+shapiro.test(farms_d_fl_corr$d_prime) # p-value = 0.001957
+
+
+#correlation index - kendall index or spearman index (non parametric such as this)
+#
+cor(farms_d_fl_corr$d_prime, farms_d_fl_corr$floral_unity)
+# -0.1804779
+cor(farms_d_fl_corr$d_prime, farms_d_fl_corr$floral_unity, method = "spearman")
+# -0.02260739
+cor(farms_d_fl_corr$d_prime, farms_d_fl_corr$floral_unity, method = "kendall")
+# -0.02260739
+
+
+##############
+
+#GUIGNO
+
+lm_types_guigno = lm(d_prime ~ flower_unity, data = farms_d_fl_corr_june) #Create the linear regression
+summary(lm_types_guigno) # p = 0.4665
+
+# shapiro test to test for normality of data
+shapiro.test(farms_d_fl_corr_june$flower_unity) # p = 3.256e-10
+# less than 0.05 so not a normal distribution
+
+shapiro.test(farms_d_fl_corr_june$d_prime) # p-value = 0.1402
+
+
+#correlation index - kendall index or spearman index (non parametric such as this)
+#
+cor(farms_d_fl_corr_june$d_prime, farms_d_fl_corr_june$flower_unity)
+# 0.09580775
+cor(farms_d_fl_corr_june$d_prime, farms_d_fl_corr_june$flower_unity, method = "spearman")
+# 0.1633752
+cor(farms_d_fl_corr_june$d_prime, farms_d_fl_corr_june$flower_unity, method = "kendall")
+# 0.105626
+
+
+######################
+
+# LUGLIO
+
+lm_types_luglio = lm(d_prime ~ floral_unity, data = farms_d_fl_corr_july) #Create the linear regression
+summary(lm_types_luglio) # p-value: 0.3177
+
+# shapiro test to test for normality of data
+shapiro.test(farms_d_fl_corr_july$floral_unity) # p-value = 4.247e-08
+# less than 0.05 so not a normal distribution
+
+shapiro.test(farms_d_fl_corr_july$d_prime) # p-value = 0.4467
+
+
+#correlation index - kendall index or spearman index (non parametric such as this)
+#
+cor(farms_d_fl_corr_july$d_prime, farms_d_fl_corr_july$floral_unity)
+# -0.1506198
+cor(farms_d_fl_corr_july$d_prime, farms_d_fl_corr_july$floral_unity, method = "spearman")
+# -0.03466461
+cor(farms_d_fl_corr_july$d_prime, farms_d_fl_corr_july$floral_unity, method = "kendall")
+# --0.0377724
+
+
+
+## correlation between d primes and farms?
+# add extra column for organic/conventional
+
+
+#anova
+# species present in all 3 months, both in organic and conventional farms
+# 3 column: name of speceis, avg d prime organic, avg d prime conventional
+#(no serpieri - integrated)
+# 
+
+# centrality - other package (igraph), betweeness, connectivity and strength
+#
+
+# pol vs plant shannon index (diversity formula in the vegan package)
+# index of distance of jaccard (coefficient of similarity)
+
+# next meeting Feb 7 
+
+
+
