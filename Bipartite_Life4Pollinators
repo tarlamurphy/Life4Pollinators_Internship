@@ -461,6 +461,141 @@ cor(farms_d_fl_corr_july$d_prime, farms_d_fl_corr_july$floral_unity, method = "k
 # add extra column for organic/conventional
 
 
+##########################
+#Shannon index
+# calculates the diversity of species - higher the number = more diversity
+# if result is 0 there is only one species present
+
+#install.packages("vegan")
+library(vegan)
+m.div <- maggiomatrix
+
+#shannon diversity index - Pollinators
+m.poll.div <- diversity(m.div, index = "shannon", groups, equalize.groups = FALSE,
+                        MARGIN = 1, base = exp(1))
+m.poll.div
+
+#transpose the matrix
+tm.div <- t(m.div)
+
+### INCORRECT
+#plants #### doesnt work because you dont actually have the abundance of the plants, only the pollinators
+m.pla.div <- diversity(tm.div, index = "shannon", equalize.groups = FALSE,
+          MARGIN = 1, base = exp(1))
+
+write.csv(m.poll.div, file="maggio_div1.csv", row.names=F)
+write.csv(m.pla.div, file="maggio_div2.csv", row.names=F)
+
+## guigno
+#shannon diversity index - Pollinators
+g.div <- guignomatrix
+
+g.poll.div <- diversity(g.div, index = "shannon", equalize.groups = FALSE,
+                        MARGIN = 1, base = exp(1))
+
+#transpose the matrix
+tg.div <- t(g.div)
+
+#plants
+g.pla.div <- diversity(tg.div, index = "shannon", equalize.groups = FALSE,
+                       MARGIN = 1, base = exp(1))
+
+write.csv(g.poll.div, file="guigno_div1.csv", row.names=F)
+write.csv(g.pla.div, file="guigno_div2.csv", row.names=F)
+
+## luglio
+#shannon diversity index - Pollinators
+l.div <- lugliomatrix
+
+l.poll.div <- diversity(l.div, index = "shannon", equalize.groups = FALSE,
+                        MARGIN = 1, base = exp(1))
+
+#transpose the matrix
+tl.div <- t(l.div)
+
+#plants
+l.pla.div <- diversity(tl.div, index = "shannon", equalize.groups = FALSE,
+                       MARGIN = 1, base = exp(1))
+
+write.csv(l.poll.div, file="luglio_div1.csv", row.names=F)
+write.csv(l.pla.div, file="luglio_div2.csv", row.names=F)
+
+#####################
+## igraph
+
+library(igraph)
+
+?degree()
+#vector of pollinator and of plants, repeat for each plant the pollinators
+# strength is the number of interactions 
+# 
+#translate the data fram as a matrix, without specifying the mode, 
+
+interaction_matrix <- as.matrix(Serpieri.definitivo)
+graph <- graph_from_incidence_matrix(interaction_matrix, weight = TRUE, mode = "all")
+c <- centrality <- degree(graph, mode = "all")
+c
+
+centrality.strength <- strength(graph, mode = "total")
+centrality.strength # exactly the same as centrality?? == issue was that graph wasn't weighted
+# weighted means the no. of connections, not just presence/absense
+
+write.csv(centrality.strength, file="strength.arr.def.csv", row.names=T)
+write.csv(c, file="centr.arr.def.csv", row.names=T)
+
+
+#degree is only the no. of interations
+
+# use strength and degree to make an index
+# goal - which is the more attractive plant
+# add to the formula the abundance of flower - standardize the analysis
+
+# centrality, betweenness, strength 
+#index from 0 - 1
+# index = strength x 0.6 + degree x 0.4 / no. of flowers ( for each species each site)
+# this will show the most attractive plants for each site.
+
+# apoidea and macrogroups separate
+
+####################################
+## APOIDEA
+
+#serpieri
+m.arr.a <- as.matrix(Arrigo.ape)
+a.graph <- graph_from_incidence_matrix(m.arr.a, weight = TRUE, mode = "all")
+a.c <- degree(a.graph, mode = "all")
+a.centrality.strength <- strength(a.graph, mode = "total")
+
+write.csv(a.centrality.strength, file="strength.arr.ape.csv", row.names=T)
+write.csv(a.c, file="centr.arr.ape.csv", row.names=T)
+
+#bertoncelli
+m.ber.a <- as.matrix(Bertoncelli.ape)
+b.graph <- graph_from_incidence_matrix(m.ber.a, weight = TRUE, mode = "all")
+b.c <- degree(b.graph, mode = "all")
+b.centrality.strength <- strength(b.graph, mode = "total")
+
+write.csv(b.centrality.strength, file="strength.ber.ape.csv", row.names=T)
+write.csv(b.c, file="centr.ber.ape.csv", row.names=T)
+
+#Capitoni
+m.cap.a <- as.matrix(Capitoni.ape)
+c.graph <- graph_from_incidence_matrix(m.cap.a, weight = TRUE, mode = "all")
+c.c <- degree(c.graph, mode = "all")
+c.centrality.strength <- strength(c.graph, mode = "total")
+
+write.csv(c.centrality.strength, file="strength.cap.ape.csv", row.names=T)
+write.csv(c.c, file="centr.cap.ape.csv", row.names=T)
+
+#Chiusa
+m.chiu.a <- as.matrix(Chiusa.ape)
+ch.graph <- graph_from_incidence_matrix(m.chiu.a, weight = TRUE, mode = "all")
+ch.c <- degree(ch.graph, mode = "all")
+ch.centrality.strength <- strength(ch.graph, mode = "total")
+
+write.csv(ch.centrality.strength, file="strength.chiu.ape.csv", row.names=T)
+write.csv(ch.c, file="centr.chiu.ape.csv", row.names=T)
+
 #anova
 # species present in all 3 months, both in organic and conventional farms
 # 3 column: name of speceis, avg d prime organic, avg d prime conventional
