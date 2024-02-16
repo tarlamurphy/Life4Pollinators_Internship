@@ -596,19 +596,187 @@ ch.centrality.strength <- strength(ch.graph, mode = "total")
 write.csv(ch.centrality.strength, file="strength.chiu.ape.csv", row.names=T)
 write.csv(ch.c, file="centr.chiu.ape.csv", row.names=T)
 
-#anova
-# species present in all 3 months, both in organic and conventional farms
-# 3 column: name of speceis, avg d prime organic, avg d prime conventional
-#(no serpieri - integrated)
-# 
+#laffi
+m.laf.a <- as.matrix(Laffi.ape)
+l.graph <- graph_from_incidence_matrix(m.laf.a, weight = TRUE, mode = "all")
+l.c <- degree(l.graph, mode = "all")
+l.centrality.strength <- strength(l.graph, mode = "total")
 
-# centrality - other package (igraph), betweeness, connectivity and strength
-#
+write.csv(l.centrality.strength, file="strength.laf.ape.csv", row.names=T)
+write.csv(l.c, file="centr.laf.ape.csv", row.names=T)
 
-# pol vs plant shannon index (diversity formula in the vegan package)
-# index of distance of jaccard (coefficient of similarity)
+#magli
+m.mag.a <- as.matrix(Magli.ape)
+m.graph <- graph_from_incidence_matrix(m.mag.a, weight = TRUE, mode = "all")
+m.c <- degree(m.graph, mode = "all")
+m.centrality.strength <- strength(m.graph, mode = "total")
 
-# next meeting Feb 7 
+write.csv(m.centrality.strength, file="strength.mag.ape.csv", row.names=T)
+write.csv(m.c, file="centr.mag.ape.csv", row.names=T)
 
+#rita
+m.ri.a <- as.matrix(Rita.ape)
+r.graph <- graph_from_incidence_matrix(m.ri.a, weight = TRUE, mode = "all")
+r.c <- degree(r.graph, mode = "all")
+r.centrality.strength <- strength(r.graph, mode = "total")
 
+write.csv(r.centrality.strength, file="strength.ri.ape.csv", row.names=T)
+write.csv(r.c, file="centr.ri.ape.csv", row.names=T)
 
+#san lazzaro
+m.sl.a <- as.matrix(sanlaz.ape)
+sl.graph <- graph_from_incidence_matrix(m.sl.a, weight = TRUE, mode = "all")
+sl.c <- degree(sl.graph, mode = "all")
+sl.centrality.strength <- strength(sl.graph, mode = "total")
+
+write.csv(sl.centrality.strength, file="strength.sl.ape.csv", row.names=T)
+write.csv(sl.c, file="centr.sl.ape.csv", row.names=T)
+
+#sasso
+m.s.a <- as.matrix(Sasso.ape)
+s.graph <- graph_from_incidence_matrix(m.s.a, weight = TRUE, mode = "all")
+s.c <- degree(s.graph, mode = "all")
+s.centrality.strength <- strength(s.graph, mode = "total")
+
+write.csv(s.centrality.strength, file="strength.s.ape.csv", row.names=T)
+write.csv(s.c, file="centr.s.ape.csv", row.names=T)
+
+#terreni
+m.t.a <- as.matrix(Terreni.ape)
+t.graph <- graph_from_incidence_matrix(m.t.a, weight = TRUE, mode = "all")
+t.c <- degree(t.graph, mode = "all")
+t.centrality.strength <- strength(t.graph, mode = "total")
+
+write.csv(t.centrality.strength, file="strength.t.ape.csv", row.names=T)
+write.csv(t.c, file="centr.t.ape.csv", row.names=T)
+
+#zanarini
+m.z.a <- as.matrix(zana.ape)
+z.graph <- graph_from_incidence_matrix(m.z.a, weight = TRUE, mode = "all")
+z.c <- degree(z.graph, mode = "all")
+z.centrality.strength <- strength(z.graph, mode = "total")
+
+write.csv(z.centrality.strength, file="strength.z.ape.csv", row.names=T)
+write.csv(z.c, file="centr.z.ape.csv", row.names=T)
+
+#zocca
+m.zo.a <- as.matrix(zocca.ape)
+zo.graph <- graph_from_incidence_matrix(m.zo.a, weight = TRUE, mode = "all")
+zo.c <- degree(zo.graph, mode = "all")
+zo.centrality.strength <- strength(zo.graph, mode = "total")
+
+write.csv(zo.centrality.strength, file="strength.zo.ape.csv", row.names=T)
+write.csv(zo.c, file="centr.zo.ape.csv", row.names=T)
+
+##MACROGRUPPI
+#arrigo
+m.arr.m <- as.matrix(arrigo.mac)
+am.graph <- graph_from_incidence_matrix(m.arr.m, weight = TRUE, mode = "all")
+am.c <- degree(am.graph, mode = "all")
+am.centrality.strength <- strength(am.graph, mode = "total")
+
+write.csv(am.centrality.strength, file="strength.arr.macro.csv", row.names=T)
+write.csv(am.c, file="centr.arr.macro.csv", row.names=T)
+
+#bertoncelli
+m.ber.m <- as.matrix(Bertoncelli.mac)
+bm.graph <- graph_from_incidence_matrix(m.ber.m, weight = TRUE, mode = "all")
+bm.c <- degree(bm.graph, mode = "all")
+bm.centrality.strength <- strength(bm.graph, mode = "total")
+
+write.csv(bm.centrality.strength, file="strength.ber.mac.csv", row.names=T)
+write.csv(bm.c, file="centr.ber.mac.csv", row.names=T)
+
+#capitoni
+m.cap.m <- as.matrix(Capitoni.mac)
+cm.graph <- graph_from_incidence_matrix(m.cap.m, weight = TRUE, mode = "all")
+cm.c <- degree(cm.graph, mode = "all")
+cm.centrality.strength <- strength(cm.graph, mode = "total")
+
+write.csv(cm.centrality.strength, file="strength.cap.mac.csv", row.names=T)
+write.csv(cm.c, file="centr.cap.mac.csv", row.names=T)
+
+#chiusa
+m.chiu.m <- as.matrix(Chiusa.mac)
+chm.graph <- graph_from_incidence_matrix(m.chiu.m, weight = TRUE, mode = "all")
+chm.c <- degree(chm.graph, mode = "all")
+chm.centrality.strength <- strength(chm.graph, mode = "total")
+
+write.csv(chm.centrality.strength, file="strength.chiu.mac.csv", row.names=T)
+write.csv(chm.c, file="centr.chiu.mac.csv", row.names=T)
+
+#laffi
+m.laf.m <- as.matrix(Laffi.mac)
+lm.graph <- graph_from_incidence_matrix(m.laf.m, weight = TRUE, mode = "all")
+lm.c <- degree(lm.graph, mode = "all")
+lm.centrality.strength <- strength(lm.graph, mode = "total")
+
+write.csv(lm.centrality.strength, file="strength.laf.mac.csv", row.names=T)
+write.csv(lm.c, file="centr.laf.mac.csv", row.names=T)
+
+#magli
+m.mag.m <- as.matrix(Magli.mac)
+mm.graph <- graph_from_incidence_matrix(m.mag.m, weight = TRUE, mode = "all")
+mm.c <- degree(mm.graph, mode = "all")
+mm.centrality.strength <- strength(mm.graph, mode = "total")
+
+write.csv(mm.centrality.strength, file="strength.mag.mac.csv", row.names=T)
+write.csv(mm.c, file="centr.mag.mac.csv", row.names=T)
+
+#rita
+m.ri.m <- as.matrix(Rita.mac)
+rm.graph <- graph_from_incidence_matrix(m.ri.m, weight = TRUE, mode = "all")
+rm.c <- degree(rm.graph, mode = "all")
+rm.centrality.strength <- strength(rm.graph, mode = "total")
+
+write.csv(rm.centrality.strength, file="strength.ri.mac.csv", row.names=T)
+write.csv(rm.c, file="centr.ri.mac.csv", row.names=T)
+
+#san lazzaro
+m.sl.m <- as.matrix(Sanlaz.mac)
+slm.graph <- graph_from_incidence_matrix(m.sl.m, weight = TRUE, mode = "all")
+slm.c <- degree(slm.graph, mode = "all")
+slm.centrality.strength <- strength(slm.graph, mode = "total")
+
+write.csv(slm.centrality.strength, file="strength.sl.mac.csv", row.names=T)
+write.csv(slm.c, file="centr.sl.mac.csv", row.names=T)
+
+#sasso
+m.s.m <- as.matrix(Sasso.mac)
+sm.graph <- graph_from_incidence_matrix(m.s.m, weight = TRUE, mode = "all")
+sm.c <- degree(sm.graph, mode = "all")
+sm.centrality.strength <- strength(sm.graph, mode = "total")
+
+write.csv(sm.centrality.strength, file="strength.s.mac.csv", row.names=T)
+write.csv(sm.c, file="centr.s.mac.csv", row.names=T)
+
+#terreni
+m.t.m <- as.matrix(Terreni.mac)
+tm.graph <- graph_from_incidence_matrix(m.t.m, weight = TRUE, mode = "all")
+tm.c <- degree(tm.graph, mode = "all")
+tm.centrality.strength <- strength(tm.graph, mode = "total")
+
+write.csv(tm.centrality.strength, file="strength.t.mac.csv", row.names=T)
+write.csv(tm.c, file="centr.t.mac.csv", row.names=T)
+
+#zanarini
+m.z.m <- as.matrix(Zanarini.mac)
+zm.graph <- graph_from_incidence_matrix(m.z.m, weight = TRUE, mode = "all")
+zm.c <- degree(zm.graph, mode = "all")
+zm.centrality.strength <- strength(zm.graph, mode = "total")
+
+write.csv(zm.centrality.strength, file="strength.z.mac.csv", row.names=T)
+write.csv(zm.c, file="centr.z.mac.csv", row.names=T)
+
+#zocca
+m.zo.m <- as.matrix(Zocca.mac)
+zom.graph <- graph_from_incidence_matrix(m.zo.m, weight = TRUE, mode = "all")
+zom.c <- degree(zom.graph, mode = "all")
+zom.centrality.strength <- strength(zom.graph, mode = "total")
+
+write.csv(zom.centrality.strength, file="strength.zo.mac.csv", row.names=T)
+write.csv(zom.c, file="centr.zo.mac.csv", row.names=T)
+
+#########################
+#######################
+##################
