@@ -1,12 +1,15 @@
-#Network analysis
-#tirocinio - 22/11/2023
+#LIFE4POLLINATORS 
+#CURRICULAR INTERNSHIP
+#UNIVERSITY OF BOLOGNA
+#Network analysis, monitoring of pollinator communities, comparisons between organic and conventional -
+#farm pollinator communities. 
+#AUTHOR: Tarla Murphy
+#EMAIL: tarla.murphy@studio.unibo.it
 
 #install.packages("bipartite")
 library(bipartite)
 library(readxl)
 library(tidyverse)
-
-?bipartite
 
 #import the datasets - May, June and July matrices
 #may <- read.csv("maggiomatrix.csv", header = T)
@@ -780,3 +783,4 @@ write.csv(zom.c, file="centr.zo.mac.csv", row.names=T)
 #########################
 #######################
 ##################
+#END
